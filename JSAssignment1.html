@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onload="createElements()">
+    <div>
+        <form action="">
+            <label>First Name:</label><br>
+            <input type="text" id="fname"><br><br>
+            <label>Last Name:</label><br>
+            <input type="text" id="lname"><br><br>
+            <label>Email:</label><br>
+            <input type="text" id="email"><br><br>
+            <label>Contact Number:</label><br>
+            <input type="text" id="number"><br><br>
+            <label>Address:</label><br>
+            <textarea id="address" cols="20" rows="5"></textarea><br><br>
+            <label>Username:</label><br>
+            <input type="text" id="uname"><br><br>
+            <label>Password:</label><br>
+            <input type="password" id="pass"><br><br>
+            <label>Gender:</label><br>
+			<input type="radio" id="gender" name="gender" value="Male">Male<br>
+			<input type="radio" id="gender" name="gender" value="Female">Female<br><br>
+            <label>Qualification:</label><br>
+            <select id="qualification">
+                <option value="">-- select --</option>
+            </select><br><br>
+            <label>Experience:</label><br>
+            <select id="experience">
+                <option value="">-- select --</option>
+            </select><br><br>
+            <label id="cboxlbl">Coding Language:</label><br>
+            <div id="checkbox"></div>
+			<br>
+            <input type="submit" id="btn" value="Submit">
+        </form>
+    </div>
+    <script>
+        qualifications = ['BTech', 'MCA', 'MBA', 'Diploma'];
+        experiences = [0,1, 2, 3, 4, 5];
+        codingLanguages = [
+            {
+                LanguageName:"C/C++",
+                isEnabled: false
+            },
+            {
+                LanguageName:"Java",
+                isEnabled: true
+            },
+            {
+                LanguageName:"C#",
+                isEnabled: true
+            },
+            {
+                LanguageName:"PHP",
+                isEnabled: false
+            },
+            {
+                LanguageName:"Python",
+                isEnabled: false
+            }
+        ];
+        document.getElementById("btn").addEventListener("click",
+        function(e) {
+            var employee={};
+            e.preventDefault();
+            employee.fname = document.getElementById("fname").value;
+            employee.lname = document.getElementById("lname").value;
+            employee.email = document.getElementById("email").value;
+            employee.contact = document.getElementById("number").value;
+            employee.address = document.getElementById("address").value;
+            employee.username = document.getElementById("uname").value;
+            employee.pass = document.getElementById("pass").value;
+            employee.gender = document.getElementById("gender").value;
+            employee.qualification = document.getElementById("qualification").value;
+            employee.experience = document.getElementById("experience").value;
+			
+            employee.codingLanguages = document.querySelectorAll("#lang:checked");
+
+            // Printing
+           console.log(employee.fname);
+           console.log(employee.lname);
+           console.log(employee.email);
+           console.log(employee.contact);
+           console.log(employee.address);
+           console.log(employee.username);
+           console.log(employee.pass);
+		   console.log(employee.gender);
+		   console.log(employee.qualification);
+		   console.log(employee.experience);
+			
+
+		
+
+            for(i=0;i<employee.codingLanguages.length;i++)
+                console.log(employee.codingLanguages[i].value);
+        })
+
+        function createElements(){
+            var qualification = document.getElementById("qualification");
+            for(let i = 0; i<qualifications.length;i++){
+                let el = document.createElement("option");
+                el.value = qualifications[i];
+                el.innerText = qualifications[i];
+                qualification.appendChild(el);
+            }
+
+            var experience = document.getElementById("experience");
+            for(let i = 0; i<experiences.length;i++){
+                let el = document.createElement("option");
+                el.value = experiences[i];
+                el.innerText = experiences[i];
+                experience.appendChild(el);
+            }
+
+            var checkDiv = document.getElementById("checkbox");
+            for(let i = 0; i<codingLanguages.length;i++){
+                let el = document.createElement("input");
+                el.type = "checkbox";
+                el.id="lang";
+                el.value = codingLanguages[i].LanguageName;
+                el.checked = codingLanguages[i].isEnabled;
+
+                let span = document.createElement("span");
+                span.appendChild(document.createTextNode(codingLanguages[i].LanguageName));
+                checkDiv.appendChild(el);
+                checkDiv.appendChild(span);
+				checkDiv.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+</body>
+</html>
